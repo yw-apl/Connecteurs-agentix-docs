@@ -258,9 +258,19 @@
     "securitySchemes": {
       "oauth2": {
         "type": "oauth2",
-        "description": "OAuth2 client_credentials. Le clientId/clientSecret est envoyé en Authorization: Basic base64(clientId:clientSecret), body x-www-form-urlencoded grant_type=client_credentials (+ scope optionnel). Token valable 3600 s.",
+        "description": "OAuth2 client_credentials. Le clientId/clientSecret est envoyé en Authorization: Basic base64(clientId:clientSecret), body x-www-form-urlencoded grant_type=client_credentials (+ scope optionnel). Token valable 3600 s. NOTE : le flux authorizationCode est déclaré uniquement pour compatibilité avec le formulaire AgentIX (Auth URL obligatoire) ; Teledec n'utilise que clientCredentials et n'a pas d'URL d'autorisation.",
         "flows": {
           "clientCredentials": {
+            "tokenUrl": "https://auth.partners.teledec.fr/oauth2/token",
+            "scopes": {
+              "stage/liste-declarations": "Liste des déclarations (recette)",
+              "prod/liste-declarations": "Liste des déclarations (production)",
+              "stage/liste-cr": "Comptes-rendus DGFiP (recette)",
+              "prod/liste-cr": "Comptes-rendus DGFiP (production)"
+            }
+          },
+          "authorizationCode": {
+            "authorizationUrl": "https://www.teledec.fr",
             "tokenUrl": "https://auth.partners.teledec.fr/oauth2/token",
             "scopes": {
               "stage/liste-declarations": "Liste des déclarations (recette)",
